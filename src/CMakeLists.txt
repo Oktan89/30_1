@@ -10,7 +10,7 @@ set(CMAKE_USE_OPENSSL OFF)
 set(CPR_ENABLE_SSL OFF)
 set(CPR_BUILD_TESTS_SSL OFF)
 
-#Подключаем библиотке libcurl (CPR)
+#Скачиваем библиотку libcurl (CPR)
 include(FetchContent)
 FetchContent_Declare(cpr GIT_REPOSITORY https://github.com/libcpr/cpr.git GIT_TAG f4622efcb59d84071ae11404ae61bd821c1c344b) # the commit hash for 1.6.2
 FetchContent_MakeAvailable(cpr)
@@ -19,5 +19,6 @@ FetchContent_MakeAvailable(cpr)
 
 add_executable(Httpbin ${SOURCES})
 
+#Подключаем библиотку CPR::CPR
 target_link_libraries(Httpbin PRIVATE cpr::cpr)
 target_include_directories(Httpbin PUBLIC ${MY_INCLUDE_DIR})
