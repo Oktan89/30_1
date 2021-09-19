@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.0.0)
 
 set(SOURCES main.cpp)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/bin)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/bin)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin)
 #Отключаем тесты сборки библиоткеи
 #set(BUILD_CPR_TESTS OFF)
 #Отключаем использование SSL
