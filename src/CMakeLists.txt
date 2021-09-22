@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.0.0)
 
-set(SOURCES main.cpp)
+set(SOURCES main.cpp )
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin)
 #Отключаем тесты сборки библиоткеи
@@ -20,5 +20,5 @@ FetchContent_MakeAvailable(cpr)
 add_executable(Httpbin ${SOURCES})
 
 #Подключаем библиотку CPR::CPR
-target_link_libraries(Httpbin PRIVATE cpr::cpr)
 target_include_directories(Httpbin PUBLIC ${MY_INCLUDE_DIR})
+target_link_libraries(Httpbin PRIVATE cpr::cpr)
