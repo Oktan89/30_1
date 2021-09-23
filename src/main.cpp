@@ -1,37 +1,87 @@
 #include <iostream>
-
-#include <cpr/cpr.h>
+#include <string>
 #include "httpcpr.h"
-
-std::function<bool(size_t, size_t, size_t, size_t)> callback = [](size_t downloadTotal, size_t downloadNow, size_t uploadTotal, size_t uploadNow) -> bool
-{
-    static size_t s_col = 0;
-    static size_t s_total = 0;
-    if (downloadNow == 0 || downloadNow == s_col)
-        return true;
-
-    if (downloadNow < s_col)
-    {
-        s_col = 0;
-        s_total = 0;
-    }
-
-    downloadNow -= s_col;
-    s_col += downloadNow;
-
-    s_total += downloadNow;
-
-    std::cout << "Downloaded " << downloadNow << " / " << s_total << " bytes." << std::endl;
-
-    return true;
-};
 
 int main()
 {
 
-cpr::Response r = cpr::Get(cpr::Url{"http://kselax.ru/contacts/"}, cpr::ProgressCallback(callback));//"http://kselax.ru/contacts/"
-    std::cout<<r.text<<std::endl;
- r = cpr::Get(cpr::Url{"http://kselax.ru/category/c/"}, cpr::ProgressCallback(callback));
- std::cout<<r.status_line<<std::endl;
-    return 0; 
+    httpOk::Httpcpr *get = nullptr;
+    std::string answer;
+
+    do
+    {
+        std::cout << "Enter: get || post || put || delete || patch || exit" << std::endl;
+        std::cin >> answer;
+        if (answer == "get")
+        {
+            if (get != nullptr)
+                delete get;
+
+            get = new httpOk::Get(answer);
+            auto r = get->query();
+            std::cout << r.text << std::endl;
+            delete get;
+            get = nullptr;
+        }
+        else if (answer == "post")
+        {
+            if (get != nullptr)
+                delete get;
+
+            get = new httpOk::Post(answer);
+            auto r = get->query();
+            std::cout << r.text << std::endl;
+            delete get;
+            get = nullptr;
+        }
+        else if (answer == "put")
+        {
+            if (get != nullptr)
+                delete get;
+
+            get = new httpOk::Put(answer);
+            auto r = get->query();
+            std::cout << r.text << std::endl;
+            delete get;
+            get = nullptr;
+        }
+        else if (answer == "delete")
+        {
+            if (get != nullptr)
+                delete get;
+
+            get = new httpOk::Delete(answer);
+            auto r = get->query();
+            std::cout << r.text << std::endl;
+            delete get;
+            get = nullptr;
+        }
+        else if (answer == "patch")
+        {
+            if (get != nullptr)
+                delete get;
+
+            get = new httpOk::Patch(answer);
+            auto r = get->query();
+            std::cout << r.text << std::endl;
+            delete get;
+            get = nullptr;
+        }
+        else if (answer != "exit")
+        {
+            if (get != nullptr)
+                delete get;
+
+            get = new httpOk::Get(answer);
+            auto r = get->query();
+            std::cout << r.text << std::endl;
+            delete get;
+            get = nullptr;
+        }
+
+    } while (answer != "exit");
+
+    if (get != nullptr)
+        delete get;
+    return 0;
 }
